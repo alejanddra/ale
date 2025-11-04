@@ -1,0 +1,233 @@
+* { 
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.body {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center; 
+  align-items: end; 
+  min-height: 100vh; 
+  background-image: url('fondo.gif');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+}
+.content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: white;
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  z-index: 0;
+}
+.carta-contenedor-3d {
+  transform-style: preserve-3d;
+  transition: transform 1s ease-in-out;
+  width: 95vw;
+  max-width: 45rem;
+  height: 65vw;
+  max-height: 25rem;
+  position: relative;
+  cursor: pointer;
+  perspective: 1000px;
+}
+
+.carta-trasera,
+.carta-enfrente {
+  background-color: rgb(182, 47, 47);
+  border-radius: 5px 5px 0px 0px;
+  width: 100%;
+  height: 100%;
+  position: absolute; 
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+}
+.carta-enfrente {
+  overflow: hidden;
+}
+
+.carta-trasera {
+  transform: rotateY(180deg);
+}
+
+.carta-trasera:after {
+  content: "💌 Sello de amor";
+  font-size: 1.5rem;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Courier New', monospace;
+  height: 100%;
+}
+
+.carta-contenedor-3d.girada {
+  transform: rotateY(180deg);
+}
+
+.solapa-superior {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0; 
+  height: 0;
+  z-index: 6; 
+  border-top: 13vw solid #C0392B;
+  border-left: 23vw solid transparent; 
+  border-right: 24vw solid transparent; 
+  transform-origin: top; 
+  transition: transform 0.5s ease-in-out;
+  border-radius: 5%;
+}
+
+.solapa-inferior {
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-bottom: 13vw solid #C0392B;
+  border-left: 23vw solid transparent;
+  border-right: 24vw solid transparent;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.solapa-izquierda {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  border-left: 23vw solid #D24037;  
+  border-top: 12vw solid transparent;
+  border-bottom: 13vw solid transparent;
+  z-index: 5;
+}
+
+.solapa-derecha {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  border-right: 24vw solid #D24037;  
+  border-top: 12vw solid transparent;
+  border-bottom: 13vw solid transparent;
+  z-index: 5;
+}
+
+.carta-interior {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+  
+  width: 80%;
+  height: 100%;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  padding: 1.2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 1;
+  transform-origin: bottom;
+  transition: transform 0.6s ease-in-out;
+}
+
+.contenido-carta {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.carta-interior img {
+  width: 60px;
+  margin-top: 1rem;
+}
+
+.carta-interior.abierta {
+  transform: translateX(-50%) translateY(-60%);
+  z-index: 4;
+}
+
+.carta-interior.abierta .contenido-carta {
+  opacity: 1;
+}
+
+.solapa-superior.abierta {
+  transform: rotateX(180deg);
+  transform-origin: top;
+  z-index: 3;
+  border-radius: 0%;
+  border-top: 16vw solid #C0392B;
+}
+.solapa-inferior::after {
+  content: "";
+  position: absolute;
+  bottom: -2vw; 
+  left: -23vw;
+  width: 47vw;
+  height: 7vw;
+  background-color: #C0392B; 
+  z-index: 7;
+}
+
+@media screen and (max-width: 800px) {
+  .solapa-superior {
+    border-top: 6rem solid #C0392B;
+    border-left: 47vw solid transparent; 
+    border-right: 47vw solid transparent;
+    border-radius: 5%;
+    z-index: 7;
+  }
+
+  .solapa-inferior {
+    border-bottom: 6rem solid #a22c1f;
+    border-left: 47vw solid transparent; 
+    border-right: 47vw solid transparent;
+    overflow: hidden;
+    z-index: 6;
+  }
+
+  .solapa-izquierda {
+    border-left: 9rem solid #D24037;
+    border-top: 5rem solid transparent;
+    border-bottom: 5rem solid transparent;
+  }
+
+  .solapa-derecha {
+    border-right: 9rem solid #D24037;
+    border-top: 5rem solid transparent;
+    border-bottom: 5rem solid transparent;
+  }
+  .solapa-superior.abierta {
+  border-top: 30vw solid #C0392B;
+  .content h1 {
+  font-size: 1.7rem;
+  }
+  .content h1 { font-size: 1.7rem; }
+  .content p { font-size: 1rem; }
+}
+}
+*p{
+ font-family: Georgia, 'Times New Roman', Times, serif;
+}
